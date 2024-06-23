@@ -29,7 +29,6 @@ end
 
 function M.after()
     M.which_key.register({
-
         b = { name = "Buffers" },
         c = { name = "Code" },
         d = { name = "Debug" },

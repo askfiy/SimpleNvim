@@ -2,6 +2,8 @@ local api = require("utils.api")
 
 local M = {}
 
+local float_border_style = api.get_setting().get_float_border("rounded")
+
 local function safe_reset_virtual_text(text)
     local pos = vim.api.nvim_win_get_cursor(0)
     local col, end_col =
@@ -69,12 +71,12 @@ function M.register_maps()
             mode = { "n" },
             lhs = "[s",
             rhs = function()
-                ---@diagnostic disable-next-line: missing-fields
-                vim.diagnostic.goto_prev({
+                vim.diagnostic.jump({
+                    count = -1,
+                    float = { border = float_border_style },
                     namespace = api.lsp.include_diagnostic_namespace_by_name({
                         "cspell",
                     }),
-                    float = false,
                 })
             end,
             options = { silent = true },
@@ -85,12 +87,12 @@ function M.register_maps()
             mode = { "n" },
             lhs = "]s",
             rhs = function()
-                ---@diagnostic disable-next-line: missing-fields
-                vim.diagnostic.goto_next({
+                vim.diagnostic.jump({
+                    count = 1,
+                    float = { border = float_border_style },
                     namespace = api.lsp.include_diagnostic_namespace_by_name({
                         "cspell",
                     }),
-                    float = false,
                 })
             end,
             options = { silent = true },

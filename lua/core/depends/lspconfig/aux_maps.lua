@@ -9,16 +9,23 @@ local float_border_style = api.get_setting().get_float_border("rounded")
 -------------------------------------------------------------------------------
 
 function M.goto_prev_diagnostic()
-    ---@diagnostic disable-next-line: missing-fields
-    vim.diagnostic.goto_prev({
+    ---@diagnostic disable-next-line: missing-fields, deprecated
+    -- vim.diagnostic.goto_prev({
+    --     float = { border = float_border_style },
+    --     namespace = api.lsp.exclude_diagnostic_namespace_by_name({ "cspell" }),
+    -- })
+
+    vim.diagnostic.jump({
+        count = -1,
         float = { border = float_border_style },
         namespace = api.lsp.exclude_diagnostic_namespace_by_name({ "cspell" }),
     })
 end
 
 function M.goto_next_diagnostic()
-    ---@diagnostic disable-next-line: missing-fields
-    vim.diagnostic.goto_next({
+    ---@diagnostic disable-next-line: missing-fields, deprecated
+    vim.diagnostic.jump({
+        count = 1,
         float = { border = float_border_style },
         namespace = api.lsp.exclude_diagnostic_namespace_by_name({ "cspell" }),
     })

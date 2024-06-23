@@ -92,9 +92,5 @@ return {
             name = "postgresql(example)",
             url = "postgres://username:password@localhost:5432/db",
         },
-        {
-            name = "CUPID",
-            url = "mysql://root:KNNmVQQhA0@rm-bp1b1pp0zucq894cdro.mysql.rds.aliyuncs.com:3306/CUPID",
-        },
     },
 }

@@ -41,16 +41,16 @@ vim.opt.showtabline = 2
 vim.opt.undofile = true
 
 vim.opt.listchars = {
-    -- tab = "⇥ ",
-    tab = "  ",
+    tab = "⇥ ",
+    -- tab = "  ",
     -- leadmultispace = "┊ ",
     leadmultispace = "  ",
     trail = "␣",
     nbsp = "⍽",
-    -- eol = "↴",
-    eol = " ",
-    -- space = "⋅",
-    space = " ",
+    eol = "↴",
+    -- eol = " ",
+    space = "⋅",
+    -- space = " ",
 }
 
 vim.opt.diffopt:append("vertical")

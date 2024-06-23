@@ -66,3 +66,21 @@ if api.get_setting().is_input_switch() then
         end,
     })
 end
+
+-- TODO: This seems to be a bug, in molecule, js files do not work smoothly with indentation
+vim.api.nvim_create_autocmd({ "FileType" }, {
+    pattern = { "javascript", "typescript" },
+    callback = function()
+        local expand = vim.opt_local.expandtab:get()
+        local shiftwidth  = vim.opt_local.shiftwidth:get()
+        local tabstop  = vim.opt_local.tabstop:get()
+        local softtabstop = vim.opt_local.softtabstop:get()
+
+        vim.defer_fn(function()
+            vim.opt_local.expandtab = expand
+            vim.opt_local.shiftwidth = shiftwidth
+            vim.opt_local.tabstop = tabstop
+            vim.opt_local.softtabstop = softtabstop
+        end, 100)
+    end,
+})

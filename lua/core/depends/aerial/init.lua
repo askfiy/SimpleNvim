@@ -21,11 +21,12 @@ function M.load()
     M.aerial.setup({
         icons = icons,
         show_guides = true,
+        attach_mode = "global",
         backends = { "lsp", "treesitter", "markdown" },
         update_events = "TextChanged,InsertLeave",
-        ---@diagnostic disable-next-line: unused-local
         on_attach = function(bufnr) end,
         layout = {
+            placement = "edge",
             min_width = 30,
             max_width = { 40, 0.2 },
         },
