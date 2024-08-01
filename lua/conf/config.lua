@@ -92,5 +92,9 @@ return {
             name = "postgresql(example)",
             url = "postgres://username:password@localhost:5432/db",
         },
+        {
+            name = "sqlite3(example)",
+            url = "sqlite3:" .. vim.fn.fnamemodify("DATABASE.db", ":p"),
+        },
     },
 }
