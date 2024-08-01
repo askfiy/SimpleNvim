@@ -124,16 +124,14 @@ function M.get_formatting_conf()
             -- vim_item.abbr = kind
             -- vim_item.menu = ("<%s>"):format(source:upper())
 
-            local defualt_kind = (" %s "):format(
-                kind_icons[kind] or default_icon
-            )
-
             -- icon_prefix
             if not api.get_setting().is_enable_icon_groups("source") then
-                vim_item.kind = defualt_kind
+                vim_item.kind = (" %s "):format(
+                    kind_icons[kind] or default_icon
+                )
             else
                 vim_item.kind = (" %s "):format(
-                    source_icons[source] or defualt_kind
+                    source_icons[source] or kind_icons[kind] or default_icon
                 )
             end
 
