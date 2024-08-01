@@ -45,6 +45,13 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
     end,
 })
 
+vim.api.nvim_create_autocmd({ "TextYankPost" }, {
+    pattern = { "*" },
+    callback = function()
+        vim.highlight.on_yank({ higroup = "Visual", timeout = 100 })
+    end,
+})
+
 if api.get_setting().is_auto_save() then
     vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged" }, {
         pattern = { "*" },
@@ -70,10 +77,11 @@ end
 -- TODO: This seems to be a bug, in molecule, js files do not work smoothly with indentation
 vim.api.nvim_create_autocmd({ "FileType" }, {
     pattern = { "javascript", "typescript" },
+    once = true,
     callback = function()
         local expand = vim.opt_local.expandtab:get()
-        local shiftwidth  = vim.opt_local.shiftwidth:get()
-        local tabstop  = vim.opt_local.tabstop:get()
+        local shiftwidth = vim.opt_local.shiftwidth:get()
+        local tabstop = vim.opt_local.tabstop:get()
         local softtabstop = vim.opt_local.softtabstop:get()
 
         vim.defer_fn(function()

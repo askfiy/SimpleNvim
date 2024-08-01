@@ -22,7 +22,6 @@ function M.load()
         icons = icons,
         show_guides = true,
         attach_mode = "global",
-        backends = { "lsp", "treesitter", "markdown" },
         update_events = "TextChanged,InsertLeave",
         on_attach = function(bufnr) end,
         layout = {

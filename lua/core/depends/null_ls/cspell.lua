@@ -71,8 +71,15 @@ function M.register_maps()
             mode = { "n" },
             lhs = "[s",
             rhs = function()
-                vim.diagnostic.jump({
-                    count = -1,
+                -- vim.diagnostic.jump({
+                --     count = -1,
+                --     float = { border = float_border_style },
+                --     namespace = api.lsp.include_diagnostic_namespace_by_name({
+                --         "cspell",
+                --     }),
+                -- })
+
+                vim.diagnostic.goto_prev({
                     float = { border = float_border_style },
                     namespace = api.lsp.include_diagnostic_namespace_by_name({
                         "cspell",
@@ -87,13 +94,19 @@ function M.register_maps()
             mode = { "n" },
             lhs = "]s",
             rhs = function()
-                vim.diagnostic.jump({
-                    count = 1,
+                vim.diagnostic.goto_next({
                     float = { border = float_border_style },
                     namespace = api.lsp.include_diagnostic_namespace_by_name({
                         "cspell",
                     }),
                 })
+                -- vim.diagnostic.jump({
+                --     count = 1,
+                --     float = { border = float_border_style },
+                --     namespace = api.lsp.include_diagnostic_namespace_by_name({
+                --         "cspell",
+                --     }),
+                -- })
             end,
             options = { silent = true },
             description = "Go to next cspell word",

@@ -62,6 +62,12 @@ function M.after()
 end
 
 function M.register_maps()
+
+    -- Delete default lsp mapping
+    -- api.map.unregister("n", "grr")
+    -- api.map.unregister("n", "grn")
+    -- api.map.unregister("n", "gra")
+
     api.map.bulk_register({
         {
             mode = { "n" },

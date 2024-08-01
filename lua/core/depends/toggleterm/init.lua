@@ -50,7 +50,7 @@ function M.after()
             if api.path.exists(config_file) then
                 local command = command:format(
                     count,
-                    vim.json.decode(api.file.read(config_file))["run"]
+                    vim.json.decode(api.file.read(config_file))["execute"]
                 )
                 return aux.run_terminal_command(command)
             end

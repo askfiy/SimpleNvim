@@ -44,7 +44,7 @@ function M.is_enable_icon_groups(groups_name)
 end
 
 function M.is_language_injections()
-    return api.get_config()["lspconfig"]["language_injections"]
+    return api.get_config()["language_injections"]
 end
 
 function M.is_enable_colorscheme(colorscheme)

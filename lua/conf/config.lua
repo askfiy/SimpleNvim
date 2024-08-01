@@ -5,10 +5,10 @@ return {
     colorscheme = "killer-queen",
     -- killer-queen
     -- visual_studio_code
-    language_injections = false,
+    language_injections = true,
     transparent_background = false,
     spell = {
-        switch = true,
+        switch = false,
         display_hint = true,
     },
     lspconfig = {

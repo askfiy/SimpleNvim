@@ -48,7 +48,10 @@ M.dapconfig = {
 M.null_ls = {
     formatting = {
         exe = "prettier",
-        extra_args = {},
+        extra_args = {
+            "--tab-width 4",
+            "--use-tabs",
+        },
         enable = true,
     },
 }
@@ -56,7 +59,6 @@ M.null_ls = {
 M.code_runner = {
     filetype = { "javascript", "typescript" },
     command = function()
-
         local buffer_filetype = vim.opt.filetype:get()
         if "javascript" == buffer_filetype then
             return ("node %s"):format(vim.fn.expand("%:p"))

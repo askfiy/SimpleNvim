@@ -186,8 +186,8 @@ function M.command_source_setup()
             M.cmp.setup.buffer({
                 sources = { { name = "vim-dadbod-completion" } },
             })
-            vim.bo.filetype = "sql"
-            vim.bo.commentstring = "-- %s"
+            vim.opt_local.filetype = "sql"
+            vim.opt_local.commentstring = "-- %s"
         end,
     })
 end

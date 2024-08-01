@@ -5,6 +5,10 @@ local M = {}
 M.lazy = {
     "folke/which-key.nvim",
     event = { "VeryLazy" },
+    dependencies = {
+        "nvim-tree/nvim-web-devicons",
+        "echasnovski/mini.icons",
+    },
 }
 
 function M.init()
@@ -24,25 +28,43 @@ function M.load()
             separator = " ",
             group = " ",
         },
+        spec = {
+            { "<leader>b", group = "Buffers" },
+            { "<leader>c", group = "Code" },
+            { "<leader>d", group = "Debug" },
+            { "<leader>f", group = "Find" },
+            { "<leader>g", group = "Git" },
+            { "<leader>l", group = "Lazy" },
+            { "<leader>r", group = "Replace" },
+            { "<leader>u", group = "Upload" },
+            {
+                "<leader>rw",
+                desc = "Replace Word To ...",
+                prefix = "",
+            },
+            { "<leader>t", group = "Terminal | Translate" },
+            {
+                "<leader>tc",
+                desc = "Translate English to Chinese",
+                prefix = "",
+            },
+            {
+                "<leader>te",
+                desc = "Translate Chinese to English",
+                prefix = "",
+            },
+            {
+                "gc",
+                desc = "Toggle comment",
+            },
+            {
+                "gcc",
+                desc = "Toggle comment line",
+            },
+        },
     })
 end
 
-function M.after()
-    M.which_key.register({
-        b = { name = "Buffers" },
-        c = { name = "Code" },
-        d = { name = "Debug" },
-        f = { name = "Find" },
-        g = { name = "Git" },
-        l = { name = "Lazy" },
-        r = { name = "Replace", w = "Replace Word To ..." },
-        u = { name = "Upload" },
-        t = {
-            name = "Terminal | Translate",
-            c = "Translate English to Chinese",
-            e = "Translate Chinese to English",
-        },
-    }, { prefix = "<leader>", mode = "n" })
-end
+function M.after() end
 
 return M
