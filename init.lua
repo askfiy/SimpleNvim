@@ -42,7 +42,3 @@ if vim.g.neovide then
 
     vim.keymap.set({ "c", "t", "i" }, "<C-V>", "<C-R>+") -- Paste command mode
 end
-
-vim.opt.runtimepath:append("$HOME/Project/neovim/http-client")
-require("http-client").setup()
-

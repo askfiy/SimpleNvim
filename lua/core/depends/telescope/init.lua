@@ -41,13 +41,27 @@ function M.load()
             },
         },
         pickers = {
+            diagnostics = {
+                mappings = {
+                    i = {
+                        ["<c-s>"] = "file_split",
+                        ["<c-q>"] = "close",
+                    },
+                    n = {
+                        ["<c-s>"] = "file_split",
+                        ["<c-q>"] = "close",
+                    },
+                },
+            },
             find_files = {
                 mappings = {
                     i = {
                         ["<c-s>"] = "file_split",
+                        ["<c-q>"] = "close",
                     },
                     n = {
                         ["<c-s>"] = "file_split",
+                        ["<c-q>"] = "close",
                     },
                 },
             },
@@ -55,9 +69,11 @@ function M.load()
                 mappings = {
                     i = {
                         ["<c-s>"] = "file_split",
+                        ["<c-q>"] = "close",
                     },
                     n = {
                         ["<c-s>"] = "file_split",
+                        ["<c-q>"] = "close",
                     },
                 },
             },
@@ -65,9 +81,11 @@ function M.load()
                 mappings = {
                     i = {
                         ["<c-d>"] = "delete_buffer",
+                        ["<c-q>"] = "close",
                     },
                     n = {
                         ["dd"] = "delete_buffer",
+                        ["<c-q>"] = "close",
                     },
                 },
             },

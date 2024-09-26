@@ -37,8 +37,8 @@ M.treesitter = {
 }
 
 M.lspconfig = {
-    server = "tsserver",
-    config = api.path.generate_relative_path("./tsserver"),
+    server = "ts_ls",
+    config = api.path.generate_relative_path("./ts_ls"),
 }
 
 M.dapconfig = {

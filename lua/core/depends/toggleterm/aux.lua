@@ -107,6 +107,7 @@ end
 
 function M.on_open(term)
     vim.wo.spell = false
+    vim.wo.winfixbuf = true
 
     api.map.register({
         mode = { "t" },

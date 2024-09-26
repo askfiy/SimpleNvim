@@ -40,6 +40,7 @@ M.mason = {
 
 M.treesitter = {
     "markdown",
+    "markdown_inline",
 }
 
 M.lspconfig = {

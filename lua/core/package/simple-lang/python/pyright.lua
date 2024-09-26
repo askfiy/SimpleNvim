@@ -55,7 +55,7 @@ return {
                 autoSearchPaths = true,
                 useLibraryCodeForTypes = true,
                 autoImportCompletions = true,
-                diagnosticMode = "workspace",
+                diagnosticMode = "openFilesOnly", -- workspace
                 -- https://github.com/microsoft/pyright/blob/main/docs/configuration.md#type-check-diagnostics-settings
                 diagnosticSeverityOverrides = {
                     strictListInference = true,

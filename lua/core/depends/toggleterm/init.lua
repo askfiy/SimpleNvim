@@ -48,7 +48,7 @@ function M.after()
 
         if config_file then
             if api.path.exists(config_file) then
-                local command = command:format(
+                command = command:format(
                     count,
                     vim.json.decode(api.file.read(config_file))["execute"]
                 )
@@ -59,7 +59,7 @@ function M.after()
         local callback = runner[vim.opt.filetype:get()]
         if callback then
             -- Add go_back=0 to keep the cursor in term
-            local command = ([[exe %d."TermExec cmd='%s' go_back=0"]]):format(
+            command = ([[exe %d."TermExec cmd='%s' go_back=0"]]):format(
                 count,
                 callback()
             )

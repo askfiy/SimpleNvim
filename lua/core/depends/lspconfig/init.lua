@@ -62,7 +62,6 @@ function M.after()
 end
 
 function M.register_maps()
-
     -- Delete default lsp mapping
     -- api.map.unregister("n", "grr")
     -- api.map.unregister("n", "grn")
@@ -91,10 +90,29 @@ function M.register_maps()
             description = "Toggle inlay hint",
         },
         {
-            mode = { "n" },
+            mode = { "n", "v" },
             lhs = "<leader>cf",
             rhs = function()
                 vim.lsp.buf.format({ async = true })
+            end,
+            options = { silent = true },
+            description = "Format buffer",
+        },
+        {
+            mode = { "v" },
+            lhs = "<leader>cf",
+            rhs = function()
+                local sr = vim.fn.getpos("v")[2]
+                local er = vim.api.nvim_win_get_cursor(0)[1]
+
+                if sr < er then
+                    er, sr = sr, er
+                end
+
+                vim.lsp.buf.format({
+                    async = true,
+                    range = { er, sr },
+                })
             end,
             options = { silent = true },
             description = "Format buffer",
@@ -146,9 +164,9 @@ function M.register_maps()
         {
             mode = { "n" },
             lhs = "go",
-            rhs = aux.maps.diagnostic_open_float,
+            rhs = aux.maps.open_diagnostic,
             options = { silent = true },
-            description = "Show Current Diagnostics",
+            description = "Show Current Cursor/Bufnr Diagnostic[s]",
         },
         {
             mode = { "n" },

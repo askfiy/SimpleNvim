@@ -9,7 +9,6 @@ local float_border_style = api.get_setting().get_float_border("rounded")
 -------------------------------------------------------------------------------
 
 function M.goto_prev_diagnostic()
-
     ---@diagnostic disable-next-line: missing-fields, deprecated
     vim.diagnostic.goto_prev({
         float = { border = float_border_style },
@@ -36,10 +35,18 @@ function M.goto_next_diagnostic()
     -- })
 end
 
-function M.diagnostic_open_float()
-    vim.diagnostic.open_float({
-        border = float_border_style,
-    })
+function M.open_diagnostic()
+    if
+        not vim.tbl_isempty(
+            vim.diagnostic.get(0, { lnum = vim.fn.line(".") - 1 })
+        )
+    then
+        vim.diagnostic.open_float({
+            border = float_border_style,
+        })
+    else
+        require("telescope.builtin").diagnostics({ bufnr = 0 })
+    end
 end
 
 function M.toggle_inlay_hint()
