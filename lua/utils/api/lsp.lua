@@ -24,16 +24,23 @@ function M.filter_publish_diagnostics(
         local new_index = 1
 
         for _, diagnostic in ipairs(params.diagnostics) do
+            local message_ignored = false
+
+            -- 使用正则表达式检查是否忽略消息
+            for _, pattern in ipairs(ignore_diagnostic_message) do
+                if string.match(diagnostic.message, pattern) then
+                    message_ignored = true
+                    break
+                end
+            end
+
             if
                 not (
                     vim.tbl_contains(
                         ignore_diagnostic_level,
                         diagnostic.severity
                     ) -- disable level
-                    or vim.tbl_contains(
-                        ignore_diagnostic_message,
-                        diagnostic.message
-                    ) -- disable message
+                    or message_ignored -- disable message
                 )
             then
                 params.diagnostics[new_index] = diagnostic

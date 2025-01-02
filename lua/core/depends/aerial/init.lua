@@ -28,9 +28,7 @@ function M.load()
             placement = "edge",
             min_width = 30,
             max_width = { 40, 0.2 },
-            win_opts = {
-                winfixbuf = true
-            }
+            win_opts = {},
         },
         lsp = {
             diagnostics_trigger_update = false,

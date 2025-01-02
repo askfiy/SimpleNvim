@@ -37,6 +37,13 @@ function M.after()
             options = { silent = true },
             description = "Render last Request",
         },
+        {
+            mode = { "n" },
+            lhs = "<leader>hc",
+            rhs = "<cmd>HttpClient stopRequest<cr>",
+            options = { silent = true },
+            description = "Close all active client",
+        },
     })
 end
 

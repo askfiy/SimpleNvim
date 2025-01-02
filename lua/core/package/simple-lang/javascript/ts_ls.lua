@@ -5,7 +5,7 @@ local util = require("lspconfig.util")
 
 local ignore_diagnostic_message = {
     "'.*' is declared but its value is never read.",
-    "File is a CommonJS module; it may be converted to an ES module.",
+    "File is a CommonJS module; it may be converted to an ES module."
 }
 
 local root_files = {

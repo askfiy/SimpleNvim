@@ -74,10 +74,18 @@ if api.get_setting().is_input_switch() then
     })
 end
 
+vim.api.nvim_create_autocmd({ "FileType" }, {
+    pattern = { "*" },
+    callback = function()
+        if vim.bo.commentstring == "# %s" then
+            vim.opt_local.smartindent = false
+        end
+    end,
+})
+
 -- TODO: This seems to be a bug, in molecule, js files do not work smoothly with indentation
 vim.api.nvim_create_autocmd({ "FileType" }, {
     pattern = { "javascript", "typescript" },
-    once = true,
     callback = function()
         local expand = vim.opt_local.expandtab:get()
         local shiftwidth = vim.opt_local.shiftwidth:get()
