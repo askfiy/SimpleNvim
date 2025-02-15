@@ -2,14 +2,15 @@ local M = {}
 
 M.lazys = {
     {
-        "davidgranstrom/nvim-markdown-preview",
+        "iamcco/markdown-preview.nvim",
+        cmd = {
+            "MarkdownPreviewToggle",
+            "MarkdownPreview",
+            "MarkdownPreviewStop",
+        },
         ft = { "markdown" },
-        config = function()
-            --  github
-            --  solarized-light
-            --  solarized-dark
-            vim.g.nvim_markdown_preview_theme = "solarized-light"
-            vim.g.nvim_markdown_preview_format = "markdown"
+        build = function()
+            vim.fn["mkdp#util#install"]()
         end,
     },
     {

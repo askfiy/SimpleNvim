@@ -92,7 +92,7 @@ end
 
 -------------------------------------------------------------------------------
 
-function M.init_configuration(configuration)
+function M.init_configuration(server, configuration)
     local default_callback = function(client, bufnr) end
 
     local private_on_init = configuration.on_init or default_callback
@@ -100,7 +100,7 @@ function M.init_configuration(configuration)
 
     configuration.on_init = function(client, bufnr)
         client.server_capabilities.documentFormattingProvider = false
-        if not api.get_setting().is_lspconfig_semantic_token() then
+        if not api.get_setting().is_lspconfig_semantic_token() and server ~= "vuels" then
             client.server_capabilities.semanticTokensProvider = nil
         end
         private_on_init(client, bufnr)

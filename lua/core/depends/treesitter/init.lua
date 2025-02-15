@@ -38,6 +38,7 @@ function M.load()
         highlight = {
             enable = enable_highlight,
             additional_vim_regex_highlighting = false,
+            disable = { "vue" },
         },
         indent = {
             enable = false,

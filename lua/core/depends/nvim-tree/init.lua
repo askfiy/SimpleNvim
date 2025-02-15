@@ -75,7 +75,7 @@ function M.load()
         },
         renderer = {
             add_trailing = true,
-            highlight_git = true,
+            highlight_git = false,
             root_folder_label = false,
             highlight_opened_files = "none",
             icons = {
@@ -83,7 +83,7 @@ function M.load()
                     file = true,
                     folder = true,
                     folder_arrow = true,
-                    git = true,
+                    git = false,
                 },
                 glyphs = {
                     default = "",

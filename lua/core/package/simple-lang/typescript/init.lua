@@ -49,8 +49,8 @@ M.null_ls = {
     formatting = {
         exe = "prettier",
         extra_args = {
-            "--tab-width 4",
-            "--use-tabs",
+            -- "--tab-width 4",
+            -- "--use-tabs",
         },
         enable = true,
     },

@@ -32,7 +32,7 @@ function M.load()
             server_conf = require(server_conf)
         end
 
-        aux.conf.init_configuration(server_conf)
+        aux.conf.init_configuration(server_name, server_conf)
         M.lspconfig[server_name].setup(server_conf)
     end
 

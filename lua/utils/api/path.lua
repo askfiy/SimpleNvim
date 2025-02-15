@@ -33,8 +33,10 @@ function M.generate_absolute_path(p)
 end
 
 function M.generate_relative_path(p)
-    local root_path =
-        table.concat(vim.iter({ vim.fn.stdpath("config"), "lua" }):flatten():totable(), "/")
+    local root_path = table.concat(
+        vim.iter({ vim.fn.stdpath("config"), "lua" }):flatten():totable(),
+        "/"
+    )
 
     ---@diagnostic disable-next-line: undefined-field
     local full_path = debug.getinfo(2, "S").source:sub(2)

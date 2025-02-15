@@ -9,6 +9,7 @@ local ignore_diagnostic_message = {
 }
 
 local root_files = {
+    "index.js",
     "tsconfig.json",
     "package.json",
     "jsconfig.json",
