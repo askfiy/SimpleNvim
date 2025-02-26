@@ -1,0 +1,10 @@
+{
+  "PREFIX COMMENT": {
+    "prefix": ["prefix"],
+    "body": [
+      "$LINE_COMMENT author: askfiy",
+      "$LINE_COMMENT date: $CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE"
+    ],
+    "description": "file prefix comment"
+  }
+}

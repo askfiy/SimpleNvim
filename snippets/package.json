@@ -1,0 +1,60 @@
+{
+  "name": "SimpletNvim",
+  "contributes": {
+    "snippets": [
+      {
+        "path": "./global.json",
+        "language": [
+          "plaintext",
+          "markdown",
+          "tex",
+          "html",
+          "global",
+          "all"
+        ]
+      },
+      {
+        "path": "./json.json",
+        "language": [
+          "json"
+        ]
+      },
+      {
+        "path": "./python.json",
+        "language": [
+          "python"
+        ]
+      },
+      {
+        "path": "./go.json",
+        "language": [
+          "go"
+        ]
+      },
+      {
+        "path": "./lua.json",
+        "language": [
+          "lua"
+        ]
+      },
+      {
+        "path": "./markdown.json",
+        "language": [
+          "markdown"
+        ]
+      },
+      {
+        "path": "./javascript.json",
+        "language": [
+          "javascript"
+        ]
+      },
+      {
+        "path": "./typescript.json",
+        "language": [
+          "typescript"
+        ]
+      }
+    ]
+  }
+}

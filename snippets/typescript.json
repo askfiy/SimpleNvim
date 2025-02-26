@@ -1,0 +1,12 @@
+{
+  "console": {
+    "prefix": ["clg"],
+    "body": ["console.log($1)"],
+    "description": "console.log"
+  },
+  "ignore": {
+    "prefix": ["ignore"],
+    "body": ["$LINE_COMMENT @ts-ignore"],
+    "description": "ignore err"
+  }
+}

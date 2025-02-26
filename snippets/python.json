@@ -1,0 +1,61 @@
+{
+  "header comment": {
+    "prefix": ["head"],
+    "body": [
+      "#!/usr/bin/env python3",
+      "# -*- coding: utf-8 -*-",
+      "# @Author  : askfiy",
+      "# @Date    : $CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE",
+      "# @Editor  : Neovim",
+      "# @Version : Python 3.11.3"
+    ],
+    "description": "Python header comment"
+  },
+  "forve_running": {
+    "prefix": ["runing"],
+    "body": [
+      "def forve_runing(fn):",
+      "   @functools.wraps(fn)",
+      "   async def inner(*args, **kwargs):",
+      "       result = await fn(*args, **kwargs)",
+      "       while list(filter(lambda t: t != asyncio.current_task(), asyncio.all_tasks())):",
+      "           await asyncio.sleep(1)",
+      "       return result",
+      "   return inner"
+    ],
+    "description": ""
+  },
+  "no params function decorator": {
+    "prefix": ["decorator"],
+    "body": [
+      "from functools import wraps\n\n",
+      "def decorator(func):",
+      "    @wraps(func)",
+      "    def wrapper(*args, **kwargs):",
+      "        print('before')",
+      "        func(*args, **kwargs)",
+      "        print('after')",
+      "    return wrapper"
+    ],
+    "description": "Python decorator without parameters"
+  },
+  "ignore pylance diagnostic": {
+    "prefix": ["ignore"],
+    "body": ["$LINE_COMMENT type: ignore"],
+    "description": "ignore langserver diagnostic"
+  },
+  "main file": {
+    "prefix": ["main"],
+    "body": [
+      "import asyncio",
+      "",
+      "",
+      "async def main():",
+      "    print(\"hello world\")",
+      "",
+      "if __name__ == \"__main__\":",
+      "    asyncio.run(main())"
+    ],
+    "description": ""
+  }
+}
