@@ -93,5 +93,10 @@
     "prefix": "therefore",
     "body": ["\\therefore"],
     "description": "Therefore in latex"
+  },
+  "power": {
+    "prefix": "power",
+    "body": ["^"],
+    "description": "Power in latex"
   }
 }

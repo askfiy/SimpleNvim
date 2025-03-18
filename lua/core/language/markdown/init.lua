@@ -1,7 +1,9 @@
 local lang_pack = {}
 
 lang_pack.lazy = {
-    --[[You may need to manually install and run the dependencies, just check the github homepage]]
+    --[[You may need to manually install and run the dependencies, just check the github homepage
+     - https://github.com/iamcco/markdown-preview.nvim
+    ]]
     {
         "iamcco/markdown-preview.nvim",
         cmd = {
@@ -12,6 +14,9 @@ lang_pack.lazy = {
         ft = { "markdown" },
         build = function()
             vim.fn["mkdp#util#install"]()
+        end,
+        config = function()
+            vim.g.mkdp_auto_close = 0
         end,
     },
     --[[Requires picgo file configuration]]
