@@ -1,4 +1,6 @@
-local lang_pack = {}
+local lang_pack = {
+    enable = false
+}
 
 lang_pack.lazy = {}
 

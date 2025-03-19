@@ -14,8 +14,10 @@ function language.get_packages()
         local dirname = utils.path.dirname(utils.path.filepath())
 
         vim.tbl_map(function(lang_name)
-            language.packages[lang_name] =
-                utils.relative_import("./" .. lang_name)
+            local lang_pack = utils.relative_import("./" .. lang_name)
+            if lang_pack.enable ~= false then
+                language.packages[lang_name] = lang_pack
+            end
         end, utils.get_package_from_directory(utils.path.join(dirname)))
     end
 

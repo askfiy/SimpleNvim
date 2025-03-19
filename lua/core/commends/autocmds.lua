@@ -72,9 +72,16 @@ if conf.is_input_switch() then
     vim.api.nvim_create_autocmd({ "InsertLeave" }, {
         pattern = { "*" },
         callback = function()
-            local input_status = tonumber(vim.fn.system("fcitx5-remote"))
-            if input_status == 2 then
-                vim.fn.system("fcitx5-remote -c")
+            if vim.fn.has("mac") then
+                local input_status = vim.fn.system("im-select")
+                if input_status:match("com.apple.keylayout.ABC") == nil then
+                    vim.fn.system("im-select com.apple.keylayout.ABC") -- 切换到英文输入法
+                end
+            elseif vim.fn.has("unix") then
+                local input_status = tonumber(vim.fn.system("fcitx5-remote"))
+                if input_status == 2 then
+                    vim.fn.system("fcitx5-remote -c")
+                end
             end
         end,
     })
