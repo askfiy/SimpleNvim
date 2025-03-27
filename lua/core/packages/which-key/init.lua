@@ -25,8 +25,8 @@ function pack.load()
         },
         icons = {
             breadcrumb = " ",
-            separator = " ",
-            group = " ",
+            separator = "  ",
+            group = "  ",
         },
         spec = {
             { "<leader>b", group = "Buffers" },
@@ -35,6 +35,7 @@ function pack.load()
             { "<leader>f", group = "Find" },
             { "<leader>g", group = "Git" },
             { "<leader>l", group = "Lazy" },
+            { "<leader>h", group = "Http" },
             { "<leader>r", group = "Replace" },
             { "<leader>u", group = "Upload" },
             {

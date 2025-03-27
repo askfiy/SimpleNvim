@@ -111,7 +111,8 @@ function cspell.register_maps()
             mode = { "n" },
             lhs = "[s",
             rhs = function()
-                vim.diagnostic.goto_prev({
+                vim.diagnostic.jump({
+                    count = -1,
                     float = { border = conf.get_float_border("rounded") },
                     namespace = include_diagnostic_namespace_by_name({
                         "cspell",
@@ -126,7 +127,8 @@ function cspell.register_maps()
             mode = { "n" },
             lhs = "]s",
             rhs = function()
-                vim.diagnostic.goto_next({
+                vim.diagnostic.jump({
+                    count = 1,
                     float = { border = conf.get_float_border("rounded") },
                     namespace = include_diagnostic_namespace_by_name({
                         "cspell",

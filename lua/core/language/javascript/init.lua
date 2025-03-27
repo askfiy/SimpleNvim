@@ -53,8 +53,7 @@ lang_pack.code_runner = {
 lang_pack.null_ls = {
     formatting = {
         exe = "prettier",
-        extra_args = {
-        },
+        extra_args = {},
         condition = function()
             return true
         end,

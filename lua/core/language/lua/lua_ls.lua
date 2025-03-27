@@ -25,18 +25,7 @@ return {
         return util.root_pattern(unpack(root_files))(fname)
             or vim.fs.dirname(vim.fs.find(".git", {})[1])
     end,
-    handlers = {
-        -- If you want to disable pyright's diagnostic prompt, open the code below
-        -- ["textDocument/publishDiagnostics"] = function(...) end,
-        -- If you want to disable pyright from diagnosing unused parameters, open the function below
-        ["textDocument/publishDiagnostics"] = vim.lsp.with(
-            utils.lsp.filter_publish_diagnostics,
-            {
-                ignore_diagnostic_level = {},
-                ignore_diagnostic_message = {},
-            }
-        ),
-    },
+    handlers = {},
     log_level = 2,
     settings = {
         Lua = {

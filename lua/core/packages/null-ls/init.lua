@@ -7,7 +7,7 @@ local helper = require("core.packages.null-ls.helper")
 local pack = {}
 
 pack.lazy = {
-    "jose-elias-alvarez/null-ls.nvim",
+    "nvimtools/none-ls.nvim",
     dependencies = {
         { "nvim-lua/plenary.nvim" },
         { "neovim/nvim-lspconfig" },
@@ -24,9 +24,13 @@ function pack.load()
     for _, source_conf in ipairs(language.get_null_ls()) do
         local null_pack =
             pack.plugin.builtins[source_conf.type][source_conf.exe]
-        null_pack = null_pack.with(source_conf)
 
-        table.insert(null_sources, null_pack)
+        if not null_pack then
+            vim.print(source_conf.exe)
+        else
+            null_pack = null_pack.with(source_conf)
+            table.insert(null_sources, null_pack)
+        end
     end
 
     pack.plugin.setup({

@@ -8,6 +8,7 @@ function utils.special_filetypes(filetypes)
     return vim.tbl_extend("force", {
         "qf",
         "help",
+        "dbui",
         "lazy",
         "mason",
         "aerial",

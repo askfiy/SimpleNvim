@@ -99,16 +99,12 @@ function pack.register_maps()
             mode = { "v" },
             lhs = "<leader>cf",
             rhs = function()
-                local sr = vim.fn.getpos("v")[2]
-                local er = vim.api.nvim_win_get_cursor(0)[1]
-
-                if sr < er then
-                    er, sr = sr, er
-                end
-
                 vim.lsp.buf.format({
                     async = true,
-                    range = { er, sr },
+                    range = {
+                        vim.fn.getpos("v"),
+                        vim.api.nvim_win_get_cursor(0),
+                    },
                 })
             end,
             options = { silent = true },
@@ -117,7 +113,9 @@ function pack.register_maps()
         {
             mode = { "n" },
             lhs = "gh",
-            rhs = vim.lsp.buf.hover,
+            rhs = function()
+                require("lsp-helper").lsp.hover()
+            end,
             options = { silent = true },
             description = "Show help information",
         },
@@ -207,7 +205,7 @@ function pack.register_maps()
             mode = { "i", "n" },
             lhs = "<c-b>",
             rhs = function()
-                require("lsp-helper").lsp.scroll_hover_to_up(5)
+                require("lsp-helper").float.scroll_hover_to_up(5)
             end,
             options = { silent = true },
             description = "Scroll up floating window",
@@ -216,7 +214,7 @@ function pack.register_maps()
             mode = { "i", "n" },
             lhs = "<c-f>",
             rhs = function()
-                require("lsp-helper").lsp.scroll_hover_to_down(5)
+                require("lsp-helper").float.scroll_hover_to_down(5)
             end,
             options = { silent = true },
             description = "Scroll down floating window",

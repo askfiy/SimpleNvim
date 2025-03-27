@@ -19,14 +19,10 @@ return {
     cmd = { "pyright-langserver", "--stdio" },
     root_dir = lspconfig_util.root_pattern(unpack(root_files)),
     handlers = {
-        ["textDocument/publishDiagnostics"] = vim.lsp.with(
-            utils.lsp.filter_publish_diagnostics,
-            {
-                ignore_diagnostic_level = {},
-                ignore_diagnostic_message = {},
-            }
-        ),
-    },
+        ["textDocument/publishDiagnostics"] = utils.lsp.filter_publish_diagnostics({
+            level={},
+            message={},
+        }),
     on_attach = function(client, bufnr)
         vim.api.nvim_create_autocmd({ "InsertEnter" }, {
             buffer = bufnr,
@@ -69,4 +65,5 @@ return {
             },
         },
     },
+}
 }

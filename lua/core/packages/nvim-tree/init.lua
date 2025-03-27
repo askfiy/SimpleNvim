@@ -70,9 +70,9 @@ function pack.load()
             require_confirm = true,
         },
         filters = {
-            dotfiles = false,
+            dotfiles = true,
             custom = { "node_modules", "\\.cache", "__pycache__" },
-            exclude = {},
+            exclude = { "env" },
         },
         renderer = {
             add_trailing = true,

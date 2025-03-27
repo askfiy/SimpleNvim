@@ -1,9 +1,6 @@
 -- https://github.com/theia-ide/typescript-language-server
 
-local utils = require("utils")
 local lspconfig_util = require("lspconfig.util")
-
-local ignore_diagnostic_message = {}
 
 local root_files = {
     "index.js",
@@ -23,18 +20,7 @@ return {
         hostInfo = "neovim",
         -- locale = "zh-CN", -- Set the language to Chinese (Simplified)
     },
-    handlers = {
-        -- If you want to disable pyright's diagnostic prompt, open the code below
-        -- ["textDocument/publishDiagnostics"] = function(...) end,
-        -- If you want to disable pyright from diagnosing unused parameters, open the function below
-        ["textDocument/publishDiagnostics"] = vim.lsp.with(
-            utils.lsp.filter_publish_diagnostics,
-            {
-                ignore_diagnostic_level = {},
-                ignore_diagnostic_message = ignore_diagnostic_message,
-            }
-        ),
-    },
+    handlers = {},
     settings = {
         -- implicitProjectConfiguration = {
         --     checkJs = true,
