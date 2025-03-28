@@ -29,10 +29,9 @@ vim.api.nvim_create_user_command("UserConfigFile", function(ctx)
 end, { desc = "Open user config file" })
 
 vim.api.nvim_create_user_command("UserSpellFile", function(ctx)
-    local snippet_file_name = vim.opt.filetype:get() .. ".json"
-    local snippet_file_path =
-        utils.path.join(vim.fn.stdpath("config"), "snippets", snippet_file_name)
-    vim.cmd((":e %s"):format(snippet_file_path))
+    local spell_file_path =
+        utils.path.join(vim.fn.stdpath("config"), "spell", "cspell.json")
+    vim.cmd((":e %s"):format(spell_file_path))
 end, { desc = "Open user spell file" })
 
 vim.api.nvim_create_user_command("UserSnippetFile", function(ctx)

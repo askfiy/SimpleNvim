@@ -34,6 +34,47 @@ local function include_diagnostic_namespace_by_name(ignore_lsp_sources)
     return namespaces
 end
 
+local function get_cspell_word()
+    local cursor = vim.api.nvim_win_get_cursor(0)
+    local lnum = cursor[1]
+    local col = cursor[2]
+
+    local diagnostics = vim.diagnostic.get(0, {
+        lnum = lnum - 1,
+    })
+    local cword = vim.fn.expand("<cword>")
+
+    local filter_diagnostics = {}
+    for _, diagnostic in ipairs(diagnostics) do
+        local cspell_word =
+            cword:match(diagnostic.message:match("Unknown word %((.*)%)"))
+        if diagnostic.source == "cspell" and cspell_word then
+            table.insert(filter_diagnostics, {
+                word = cspell_word,
+                lnum = diagnostic.lnum,
+                end_lnum = diagnostic.end_lnum,
+                col = diagnostic.col,
+                end_col = diagnostic.end_col,
+            })
+        end
+    end
+
+    local closest_diag = nil
+    local closest_distance = math.huge
+
+    for _, diagnostic in ipairs(filter_diagnostics) do
+        local distance = math.abs(diagnostic.col - col)
+        if distance < closest_distance then
+            closest_distance = distance
+            closest_diag = diagnostic
+        end
+    end
+
+    if closest_diag then
+        return closest_diag.word
+    end
+end
+
 vim.api.nvim_create_autocmd("VimEnter", {
     pattern = { "*" },
     callback = function()
@@ -142,7 +183,8 @@ function cspell.register_maps()
             mode = { "n" },
             lhs = "zg",
             rhs = function()
-                local word = vim.fn.expand("<cword>")
+                local word = get_cspell_word()
+
                 if not vim.tbl_contains(cspell.cacher.words, word) then
                     table.insert(cspell.cacher.words, word)
                     vim.fn.writefile(
@@ -167,24 +209,27 @@ function cspell.register_maps()
             lhs = "zw",
             rhs = function()
                 local word = vim.fn.expand("<cword>")
-                if vim.tbl_contains(cspell.cacher.words, word) then
-                    table.remove(
-                        cspell.cacher.words,
-                        tbl_find_index(cspell.cacher.words, word)
-                    )
-                    vim.fn.writefile(
-                        { vim.json.encode(cspell.cacher) },
-                        conf.get_cspell_conf_path()
-                    )
-                    vim.cmd([[:e]])
-                else
-                    vim.api.nvim_echo({
-                        {
-                            ("'%s' does not exist"):format(word),
-                            "WarningMsg",
-                        },
-                    }, false, {})
+
+                for _, cacher_word in ipairs(cspell.cacher.words) do
+                    if word:find(cacher_word) then
+                        table.remove(
+                            cspell.cacher.words,
+                            tbl_find_index(cspell.cacher.words, cacher_word)
+                        )
+                        vim.fn.writefile(
+                            { vim.json.encode(cspell.cacher) },
+                            conf.get_cspell_conf_path()
+                        )
+                        return vim.cmd([[:e]])
+                    end
                 end
+
+                vim.api.nvim_echo({
+                    {
+                        ("'%s' does not exist"):format(word),
+                        "WarningMsg",
+                    },
+                }, false, {})
             end,
             options = { silent = true },
             description = "Add word to cspell.json",

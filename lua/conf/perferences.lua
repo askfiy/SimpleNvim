@@ -1,3 +1,5 @@
+vim.deprecate = function() end
+
 vim.g.mapleader = " "
 
 vim.opt.ruler = false
