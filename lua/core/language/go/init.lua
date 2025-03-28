@@ -1,5 +1,5 @@
 local lang_pack = {
-    enable = false
+    enable = false,
 }
 
 lang_pack.lazy = {}

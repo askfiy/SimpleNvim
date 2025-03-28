@@ -23,9 +23,9 @@ function pack.load()
     pack.plugin.setup({
         ui = {
             icons = {
-                package_installed = "",
-                package_pending = "",
-                package_uninstalled = "",
+                package_installed = "󰜛",
+                package_pending = "󰄼",
+                package_uninstalled = "󱌠",
             },
             border = conf.get_float_border("double"),
         },

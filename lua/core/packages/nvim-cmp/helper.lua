@@ -2,6 +2,22 @@ local conf = require("conf")
 
 local helper = {}
 
+local function autocomplete()
+    local luasnip = require("luasnip")
+    local default_on_change = require("cmp.core").on_change
+
+    require("cmp.core").on_change = function(self, trigger_event)
+        local in_snippet = luasnip.in_snippet()
+        local jump_prev_able = luasnip.jumpable(-1)
+        local jump_next_able = luasnip.jumpable(1)
+
+        -- When jumping up or down is available in the fragment, no automatic completion will be performed
+        if not (in_snippet and (jump_prev_able or jump_next_able)) then
+            default_on_change(self, trigger_event)
+        end
+    end
+end
+
 local function under_sort(entry1, entry2)
     local _, entry1_under = entry1.completion_item.label:find("^_+")
     local _, entry2_under = entry2.completion_item.label:find("^_+")
@@ -259,8 +275,9 @@ function helper.load_sources()
 end
 
 function helper.load()
-    helper.plugin = require("cmp")
+    autocomplete()
 
+    helper.plugin = require("cmp")
     helper.preselect = require("cmp.types").cmp.PreselectMode.None
 
     helper.view = get_view_config()
