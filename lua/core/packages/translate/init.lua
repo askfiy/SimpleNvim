@@ -2,8 +2,6 @@
 
 local utils = require("utils")
 
-local conf = require("conf")
-
 local pack = {}
 
 pack.lazy = {

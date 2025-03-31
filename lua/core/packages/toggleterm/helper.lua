@@ -43,11 +43,30 @@ local function create_float_term()
             border = conf.get_float_border("double"),
         },
         on_open = function(term)
-            vim.cmd("startinsert")
+            vim.defer_fn(function()
+                vim.cmd("startinsert")
+            end, 0)
+
             utils.map.register({
-                mode = { "t" },
+                mode = { "t", "n" },
                 lhs = "<esc>",
-                rhs = "<c-\\><c-n><cmd>close<cr>",
+                rhs = function()
+                    local current_mode = vim.fn.mode()
+                    if current_mode == "t" then
+                        vim.api.nvim_feedkeys(
+                            vim.api.nvim_replace_termcodes(
+                                "<C-\\><C-n>",
+                                true,
+                                false,
+                                true
+                            ),
+                            "n",
+                            true
+                        )
+                    elseif current_mode == "n" then
+                        vim.cmd("close")
+                    end
+                end,
                 options = { silent = true, buffer = term.bufnr },
                 description = "Escape float terminal",
             })
@@ -65,7 +84,10 @@ local function create_lazy_term()
             border = conf.get_float_border("double"),
         },
         on_open = function(term)
-            vim.cmd("startinsert")
+            vim.defer_fn(function()
+                vim.cmd("startinsert")
+            end, 0)
+
             utils.map.register({
                 mode = { "i" },
                 lhs = "q",

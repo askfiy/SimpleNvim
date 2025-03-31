@@ -41,6 +41,7 @@ local function get_cspell_word()
 
     local diagnostics = vim.diagnostic.get(0, {
         lnum = lnum - 1,
+        namespace = include_diagnostic_namespace_by_name({"cspell"})
     })
     local cword = vim.fn.expand("<cword>")
 
