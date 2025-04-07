@@ -17,7 +17,7 @@
   "| symbol": {
     "prefix": ["|"],
     "body": ["&#124;"],
-    "description": "rpleace | to &#124;"
+    "description": "replace | to &#124;"
   },
   "row": {
     "prefix": ["row"],
@@ -38,6 +38,11 @@
     "prefix": ["neq"],
     "body": ["$1 \\neq $2"],
     "description": "Not equal"
+  },
+  "approx": {
+    "prefix": ["approx"],
+    "body": ["$1 ≈ $2"],
+    "description": "Approx"
   },
   "pm": {
     "prefix": ["pm"],
