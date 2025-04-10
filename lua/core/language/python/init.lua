@@ -38,7 +38,7 @@ lang_pack.null_ls = {
             "--max-line-length=180",
         },
         condition = function()
-            return true
+            return false
         end,
     },
     diagnostics = {
