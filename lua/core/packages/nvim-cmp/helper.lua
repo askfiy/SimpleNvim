@@ -140,7 +140,7 @@ local function get_formatting_config()
 
             local source = entry.source.name
             if entry.source.name == "nvim_lsp" then
-                source = entry.source.entries[1].source.source.client.server_info.name
+                source = entry.source.entries[1].source.source.client.name
             end
 
             -- vim_item.abbr = kind
