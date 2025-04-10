@@ -12,7 +12,13 @@ local function autocomplete()
         local jump_next_able = luasnip.jumpable(1)
 
         -- When jumping up or down is available in the fragment, no automatic completion will be performed
-        if not (in_snippet and (jump_prev_able or jump_next_able)) then
+        if
+            not (
+                vim.bo.filetype == "markdown"
+                and in_snippet
+                and (jump_prev_able or jump_next_able)
+            )
+        then
             default_on_change(self, trigger_event)
         end
     end
@@ -113,16 +119,15 @@ local function get_formatting_config()
 
     local complete_duplicate_conf = {
         -- allow duplicate keywords
-        ["luasnip"] = 1,
         ["nvim_lsp"] = 1,
         -- do not allow duplicate keywords
+        ["luasnip"] = 0,
         ["buffer"] = 0,
         ["path"] = 0,
         ["cmdline"] = 0,
         ["cmp_tabnine"] = 0,
         ["vim-dadbod-completion"] = 0,
     }
-
     return {
         -- sort menu
         fields = { "kind", "abbr", "menu" },
@@ -131,15 +136,18 @@ local function get_formatting_config()
         format = function(entry, vim_item)
             local abbr = vim_item.abbr
             local kind = vim_item.kind
-            local menu = vim_item.menu
+            -- local menu = vim_item.menu
 
             local source = entry.source.name
+            if entry.source.name == "nvim_lsp" then
+                source = entry.source.entries[1].source.source.client.server_info.name
+            end
 
             -- vim_item.abbr = kind
             -- vim_item.menu = ("<%s>"):format(source:upper())
 
             vim_item.kind = (" %s "):format(kind_icons[kind] or default_icon)
-            vim_item.menu = ("<%s>"):format(menu)
+            vim_item.menu = ("<%s>"):format(source)
 
             vim_item.dup = complete_duplicate_conf[source] or 0
 

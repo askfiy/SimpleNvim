@@ -40,6 +40,7 @@ function language.get_lazy_packages()
 end
 
 function language.get_lsp_packages()
+    local registry = require("mason-registry")
     local lang_packages = language.get_packages()
     local lsp_packages = {}
 
@@ -62,6 +63,11 @@ function language.get_lsp_packages()
 
                     local ok, server_conf =
                         pcall(utils.relative_import, config_path)
+
+                    local aliases = registry.get_package_aliases(server_name)
+                    if not vim.tbl_isempty(aliases) then
+                        server_name = aliases[1]
+                    end
 
                     if not ok then
                         lsp_packages[server_name] = {}

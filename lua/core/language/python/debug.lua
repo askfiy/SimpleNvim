@@ -14,6 +14,8 @@ return {
                 "python3"
             ),
             args = { "-m", "debugpy.adapter" },
+            -- command = "python3",
+            -- args = { "-m", "debugpy.adapter" },
         },
     },
     configurations = {
