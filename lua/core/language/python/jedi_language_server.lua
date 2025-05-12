@@ -20,7 +20,7 @@ return {
     settings = {
         initializationOptions = {
             diagnostics = {
-                eanble = true,
+                enable = false,
             },
             hover = {
                 enable = false,

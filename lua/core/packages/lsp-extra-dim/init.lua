@@ -1,4 +1,4 @@
--- https://github.com/askfiy/lsp-helper.nvim
+-- https://github.com/askfiy/lsp-extra-dim.nvim
 
 local pack = {}
 

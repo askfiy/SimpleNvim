@@ -44,13 +44,14 @@ vim.opt.showtabline = 2
 vim.opt.undofile = true
 
 vim.opt.listchars:append({
+
     tab = "⇥ ",
     -- tab = "  ",
     -- leadmultispace = "┊ ",
     leadmultispace = "  ",
     trail = "␣",
     nbsp = "⍽",
-    eol = "↴",
+    -- eol = "↴",
     -- eol = " ",
     space = "⋅",
     -- space = " ",

@@ -1,57 +1,23 @@
--- https://github.com/uga-rosa/translate.nvim
+-- https://github.com/askfiy/smart-translate.nvim
 
 local utils = require("utils")
 
 local pack = {}
 
 pack.lazy = {
-    "uga-rosa/translate.nvim",
+    "askfiy/smart-translate.nvim",
     cmd = { "Translate" },
+    dependencies = {
+        "askfiy/http.nvim", -- a wrapper implementation of the Python aiohttp library that uses CURL to send requests.
+    },
 }
 
 function pack.before_load()
-    pack.plugin = require("translate")
+    pack.plugin = require("smart-translate")
 end
 
 function pack.load()
-    pack.plugin.setup({
-        default = {
-            command = "translate_shell",
-            output = "floating",
-            parse_before = "no_handle",
-            -- parse_after = "bing",
-        },
-        preset = {
-            command = {
-                translate_shell = {
-                    -- args = { "-e", "bing" },
-                    args = { "-x", "127.0.0.1:7890" },
-                },
-            },
-        },
-        parse_after = {
-            -- bing = {
-            --     cmd = function(lines)
-            --         -- Fold multiple rows into one
-            --         lines = vim.fn.join(lines, "\n")
-            --         -- Replace \\n to \n
-            --         ---@diagnostic disable-next-line: need-check-nil
-            --         lines = lines:gsub("\\n", "\n")
-            --         lines = lines:gsub("\\t", "\n")
-            --         -- Split into tables by \n
-            --         return vim.tbl_filter(function(line)
-            --             return line ~= ""
-            --         end, vim.fn.split(lines, "\n"))
-            --     end,
-            -- },
-        },
-        replace_symbols = {
-            google = {},
-            deepl_pro = {},
-            deepl_free = {},
-            translate_shell = {},
-        },
-    })
+    pack.plugin.setup()
 end
 
 function pack.after_load() end
@@ -61,100 +27,86 @@ function pack.register_maps()
         {
             mode = { "n", "v" },
             lhs = "<leader>tcs",
-            rhs = ":Translate ZH -source=EN -output=split<cr>",
+            rhs = ":Translate --target=zh-CN --source=en --handle=split<cr>",
             options = { silent = true },
-            description = "Translate English to Chinese and open in split window",
+            description = "Translatelate English to Chinese and open in split window",
         },
         {
             mode = { "n", "v" },
             lhs = "<leader>tcr",
-            rhs = ":Translate ZH -source=EN -output=replace<cr>",
+            rhs = ":Translate --target=zh-CN --source=en --handle=replace<cr>",
             options = { silent = true },
-            description = "Translate English to Chinese and replace English",
+            description = "Translatelate English to Chinese and replace English",
         },
         {
             mode = { "n", "v" },
             lhs = "<leader>tcf",
-            rhs = ":Translate ZH -source=EN -output=floating<cr>",
+            rhs = ":Translate --target=zh-CN --source=en --handle=float<cr>",
             options = { silent = true },
-            description = "Translate English to Chinese and open in float window",
-        },
-        {
-            mode = { "n", "v" },
-            lhs = "<leader>tci",
-            rhs = ":Translate ZH -source=EN -output=insert<cr>",
-            options = { silent = true },
-            description = "Translate English to Chinese and insert to next line",
+            description = "Translatelate English to Chinese and open in float window",
         },
         {
             mode = { "n", "v" },
             lhs = "<leader>tcc",
-            rhs = ":Translate ZH -source=EN -output=register<cr>",
+            rhs = ":Translate --target=zh-CN --source=en --handle=register<cr>",
             options = { silent = true },
-            description = "Translate English to Chinese and copy result to clipboard",
+            description = "Translatelate English to Chinese and copy result to clipboard",
         },
         {
             mode = { "n" },
             lhs = "<leader>tcb",
-            rhs = ":Translate ZH -source=EN -output=floating -comment<cr>",
+            rhs = ":Translate --target=zh-CN --source=en --handle=float --comment<cr>",
             options = { silent = true },
-            description = "Translate English comment to Chinese and open in float window",
+            description = "Translatelate English comment to Chinese and open in float window",
         },
         {
             mode = { "n" },
             lhs = "<leader>tcw",
-            rhs = ":normal! m'viw<cr>:Translate ZH -source=EN -output=floating<cr>`'",
+            rhs = ":normal! m'viw<cr>:Translate --target=zh-CN --source=en --handle=float<cr>`'",
             options = { silent = true },
-            description = "Translate English word to Chinese and open in float window",
-        },
-        {
-            mode = { "n", "v" },
-            lhs = "<leader>tes",
-            rhs = ":Translate EN -source=ZH -output=split<cr>",
-            options = { silent = true },
-            description = "Translate Chinese to English and open in split window",
+            description = "Translatelate English word to Chinese and open in float window",
         },
         {
             mode = { "n", "v" },
             lhs = "<leader>ter",
-            rhs = ":Translate EN -source=ZH -output=replace<cr>",
+            rhs = ":Translate --target=en --source=zh-CN --handle=replace<cr>",
             options = { silent = true },
-            description = "Translate Chinese to English and replace Chinese",
+            description = "Translatelate Chinese to English and replace Chinese",
+        },
+        {
+            mode = { "n", "v" },
+            lhs = "<leader>tes",
+            rhs = ":Translate --target=en --source=zh-CN --handle=split<cr>",
+            options = { silent = true },
+            description = "Translatelate Chinese to English and open in split window",
         },
         {
             mode = { "n", "v" },
             lhs = "<leader>tef",
-            rhs = ":Translate EN -source=ZH -output=floating<cr>",
+            rhs = ":Translate --target=en --source=zh-CN --handle=float<cr>",
             options = { silent = true },
-            description = "Translate Chinese to English and open in float window",
-        },
-        {
-            mode = { "n", "v" },
-            lhs = "<leader>tei",
-            rhs = ":Translate EN -source=ZH -output=insert<cr>",
-            options = { silent = true },
-            description = "Translate Chinese to English and insert to next line",
+            description = "Translatelate Chinese to English and open in float window",
         },
         {
             mode = { "n", "v" },
             lhs = "<leader>tec",
-            rhs = ":Translate EN -source=ZH -output=register<cr>",
+            rhs = ":Translate --target=en --source=zh-CN --handle=register<cr>",
             options = { silent = true },
-            description = "Translate Chinese to English and copy result to clipboard",
+            description = "Translatelate Chinese to English and copy result to clipboard",
         },
         {
             mode = { "n" },
             lhs = "<leader>teb",
-            rhs = ":Translate EN -source=ZH -output=floating -comment<cr>",
+            rhs = ":Translate --target=en --source=zh-CN --handle=float --comment<cr>",
             options = { silent = true },
-            description = "Translate Chinese comment to English and open in float window",
+            description = "Translatelate Chinese comment to English and open in float window",
         },
         {
             mode = { "n" },
             lhs = "<leader>tew",
-            rhs = ":normal! m'viw<cr>:Translate EN -source=ZH -output=floating<cr>`'",
+            rhs = ":normal! m'viw<cr>:Translate --target=en --source=zh-CN --handle=float<cr>`'",
             options = { silent = true },
-            description = "Translate Chinese word to English and open in float window",
+            description = "Translatelate Chinese word to English and open in float window",
         },
     })
 end

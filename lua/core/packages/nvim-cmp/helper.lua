@@ -139,9 +139,6 @@ local function get_formatting_config()
             -- local menu = vim_item.menu
 
             local source = entry.source.name
-            if entry.source.name == "nvim_lsp" then
-                source = entry.source.entries[1].source.source.client.server_info.name
-            end
 
             -- vim_item.abbr = kind
             -- vim_item.menu = ("<%s>"):format(source:upper())

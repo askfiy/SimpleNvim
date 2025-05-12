@@ -27,7 +27,7 @@ lang_pack.treesitter = {
 }
 
 lang_pack.lspconfig = {
-    server = { "ruff", "jedi-language-server" },
+    server = { "ruff", "jedi_language_server" },
 }
 
 lang_pack.null_ls = {

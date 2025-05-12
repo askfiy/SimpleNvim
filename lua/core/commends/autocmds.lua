@@ -2,33 +2,33 @@ local conf = require("conf")
 
 local restore = vim.api.nvim_create_augroup("restore", { clear = true })
 
-vim.api.nvim_create_autocmd({ "BufUnload" }, {
-    pattern = "*",
-    group = restore,
-    command = "silent! mkview",
-})
+-- vim.api.nvim_create_autocmd({ "BufUnload" }, {
+--     pattern = "*",
+--     group = restore,
+--     command = "silent! mkview",
+-- })
 
-vim.api.nvim_create_autocmd({ "BufRead" }, {
-    pattern = "*",
-    group = restore,
-    command = "silent! loadview",
-})
+-- vim.api.nvim_create_autocmd({ "BufRead" }, {
+--     pattern = "*",
+--     group = restore,
+--     command = "silent! loadview",
+-- })
 
-vim.api.nvim_create_autocmd("BufReadPost", {
-    pattern = { "*" },
-    group = restore,
-    callback = function()
-        if
-            vim.fn.line("'\"") > 0
-            and vim.fn.line("'\"") <= vim.fn.line("$")
-        then
-            vim.fn.setpos(".", vim.fn.getpos("'\""))
-            -- how do I center the buffer in a sane way??
-            -- vim.cmd('normal zz')
-            vim.cmd("silent! foldopen")
-        end
-    end,
-})
+-- vim.api.nvim_create_autocmd("BufReadPost", {
+--     pattern = { "*" },
+--     group = restore,
+--     callback = function()
+--         if
+--             vim.fn.line("'\"") > 0
+--             and vim.fn.line("'\"") <= vim.fn.line("$")
+--         then
+--             vim.fn.setpos(".", vim.fn.getpos("'\""))
+--             -- how do I center the buffer in a sane way??
+--             -- vim.cmd('normal zz')
+--             vim.cmd("silent! foldopen")
+--         end
+--     end,
+-- })
 
 vim.api.nvim_create_autocmd("VimLeavePre", {
     pattern = { "*" },

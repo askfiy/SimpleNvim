@@ -17,7 +17,7 @@ function pack.load()
     pack.plugin.setup({
         signs = false,
         keywords = {
-            NOTE = { color = "#98D8AA" },
+            NOTE = { color = "#98D8AA", alt = { "PASS" } },
             TODO = { color = "#1ABC9C" },
             WARN = { color = "#F7D060" },
             ERROR = { color = "#ED2B2A" },
