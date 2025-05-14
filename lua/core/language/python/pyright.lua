@@ -23,51 +23,50 @@ return {
             level = {},
             message = {},
         }),
-        on_attach = function(client, bufnr)
-            -- disable hover, use jedi
-            client.server_capabilities.hoverProvider = false
+    },
+    on_attach = function(client, bufnr)
+        -- disable hover, use jedi
+        client.server_capabilities.hoverProvider = false
+        vim.api.nvim_create_autocmd({ "InsertEnter" }, {
+            buffer = bufnr,
+            callback = function()
+                client.notify(
+                    "workspace/didChangeConfiguration",
+                    { settings = client.config.settings }
+                )
+            end,
+        })
+    end,
+    settings = {
+        python = {
+            analysis = {
+                autoImportCompletions = false,
+                lognore = { "*" },
 
-            vim.api.nvim_create_autocmd({ "InsertEnter" }, {
-                buffer = bufnr,
-                callback = function()
-                    client.notify(
-                        "workspace/didChangeConfiguration",
-                        { settings = client.config.settings }
-                    )
-                end,
-            })
-        end,
-        settings = {
-            python = {
-                analysis = {
-                    autoImportCompletions = false,
-                    lognore = { "*" },
-
-                    -- autoSearchPaths = true,
-                    -- useLibraryCodeForTypes = true,
-                    -- autoImportCompletions = false,
-                    -- diagnosticMode = "openFilesOnly", -- workspace
-                    -- -- https://github.com/microsoft/pyright/blob/main/docs/configuration.md#type-check-diagnostics-settings
-                    -- diagnosticSeverityOverrides = {
-                    --     strictListInference = true,
-                    --     strictDictionaryInference = true,
-                    --     strictSetInference = true,
-                    --     reportUnusedExpression = "none",
-                    --     reportUnusedCoroutine = "none",
-                    --     reportUnusedClass = "none",
-                    --     reportUnusedImport = "none",
-                    --     reportUnusedFunction = "none",
-                    --     reportUnusedVariable = "none",
-                    --     reportUnusedCallResult = "none",
-                    --     reportDuplicateImport = "warning",
-                    --     reportPrivateUsage = "warning",
-                    --     reportConstantRedefinition = "error",
-                    --     reportIncompatibleMethodOverride = "error",
-                    --     reportMissingImports = "error",
-                    --     reportUndefinedVariable = "error",
-                    --     reportAssertAlwaysTrue = "error",
-                    -- },
-                },
+                -- autoSearchPaths = true,
+                -- useLibraryCodeForTypes = true,
+                -- autoImportCompletions = false,
+                -- diagnosticMode = "openFilesOnly", -- workspace
+                -- -- https://github.com/microsoft/pyright/blob/main/docs/configuration.md#type-check-diagnostics-settings
+                -- diagnosticSeverityOverrides = {
+                --     strictListInference = true,
+                --     strictDictionaryInference = true,
+                --     strictSetInference = true,
+                --     reportUnusedExpression = "none",
+                --     reportUnusedCoroutine = "none",
+                --     reportUnusedClass = "none",
+                --     reportUnusedImport = "none",
+                --     reportUnusedFunction = "none",
+                --     reportUnusedVariable = "none",
+                --     reportUnusedCallResult = "none",
+                --     reportDuplicateImport = "warning",
+                --     reportPrivateUsage = "warning",
+                --     reportConstantRedefinition = "error",
+                --     reportIncompatibleMethodOverride = "error",
+                --     reportMissingImports = "error",
+                --     reportUndefinedVariable = "error",
+                --     reportAssertAlwaysTrue = "error",
+                -- },
             },
         },
     },

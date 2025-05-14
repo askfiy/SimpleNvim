@@ -59,7 +59,6 @@ function pack.after_load()
     for server_name, server_conf in pairs(language.get_lsp_packages()) do
         vim.lsp.config(server_name, server_conf)
         vim.lsp.enable({server_name})
-        pack.plugin[server_name].setup(server_conf)
     end
 end
 
