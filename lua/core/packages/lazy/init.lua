@@ -1,3 +1,5 @@
+-- https://github.com/folke/lazy.nvim
+
 local conf = require("conf")
 local utils = require("utils")
 local language = require("core.language")

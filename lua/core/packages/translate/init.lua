@@ -17,7 +17,17 @@ function pack.before_load()
 end
 
 function pack.load()
-    pack.plugin.setup()
+    pack.plugin.setup({
+        default = {
+            cmds = {
+                source = "auto",
+                target = "zh-CN",
+                handle = "float",
+                engine = "deepl",
+            },
+            cache = true,
+        },
+    })
 end
 
 function pack.after_load() end
