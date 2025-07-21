@@ -11,7 +11,7 @@ lang_pack.lazy = {
 
 lang_pack.mason = {
     ensure_installed = {
-        "autopep8",
+        "ruff",
         "pylint",
         "debugpy",
     },
@@ -27,7 +27,7 @@ lang_pack.treesitter = {
 }
 
 lang_pack.lspconfig = {
-    server = { "ruff", "jedi_language_server" },
+    server = { "ruff", "basedpyright" },
 }
 
 lang_pack.null_ls = {

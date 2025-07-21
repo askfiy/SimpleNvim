@@ -17,6 +17,11 @@ pack.lazy = {
 
 function pack.before_load()
     pack.plugin = require("lspconfig")
+
+    -- require("mason-lspconfig").setup({
+    --     ensure_installed = {},
+    --     automatic_installation = true,
+    -- })
 end
 
 function pack.load()
@@ -58,7 +63,7 @@ end
 function pack.after_load()
     for server_name, server_conf in pairs(language.get_lsp_packages()) do
         vim.lsp.config(server_name, server_conf)
-        vim.lsp.enable({server_name})
+        vim.lsp.enable({ server_name })
     end
 end
 

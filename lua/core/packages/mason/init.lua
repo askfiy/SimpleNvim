@@ -33,10 +33,6 @@ function pack.load()
         install_root_dir = conf.get_mason_install_path(),
     })
 
-    require("mason-lspconfig").setup({
-        ensure_installed = {},
-        automatic_installation = true,
-    })
 end
 
 function pack.after_load()

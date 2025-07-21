@@ -24,7 +24,7 @@ function pack.load()
             HACK = { color = "#F2AFEF", alt = { "DEP" } },
             FIX = { color = "#6ACAFC", alt = { "BUG" } },
         },
-        highlight = { multiline = false },
+        highlight = { multiline = true },
         gui_style = { fg = "NONE", bg = "NONE", gui = "NONE" },
     })
 end

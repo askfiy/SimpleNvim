@@ -140,6 +140,11 @@ local function get_formatting_config()
 
             local source = entry.source.name
 
+            if entry.source.name == "nvim_lsp" and vim.bo.filetype == "python" then
+                source =
+                    entry.source.entries[1].source.source.client.server_info.name
+            end
+
             -- vim_item.abbr = kind
             -- vim_item.menu = ("<%s>"):format(source:upper())
 
