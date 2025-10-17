@@ -23,7 +23,7 @@ function pack.load()
                 source = "auto",
                 target = "zh-CN",
                 handle = "float",
-                engine = "deepl",
+                engine = "google",
             },
             cache = true,
         },

@@ -71,6 +71,7 @@ function pack.load()
         },
         filters = {
             dotfiles = true,
+            git_ignored = false,
             custom = { "node_modules", "\\.cache", "__pycache__" },
             exclude = { "env" },
         },

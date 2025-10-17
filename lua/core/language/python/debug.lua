@@ -41,6 +41,21 @@ return {
                     "--noreload",
                 },
             },
+            {
+                type = "python",
+                request = "launch",
+                name = "XYZ-Platform",
+                module = "uvicorn",
+                pythonPath = "python3",
+                justMyCode = false,
+                args = {
+                    "src.main:backend_app",
+                    "--host",
+                    "0.0.0.0",
+                    "--port",
+                    "8100",
+                },
+            },
         },
     },
 }
