@@ -15,14 +15,13 @@ pack.lazy = {
 }
 
 function pack.before_load()
-    pack.plugin = require("nvim-treesitter.configs")
+    pack.plugin = require("nvim-treesitter")
 end
 
 function pack.load()
-    require("nvim-treesitter.install").prefer_git = true
-
-    pack.plugin.setup({
-        ensure_installed = language.get_treesitter_packages({
+    pack.plugin.setup()
+    require("nvim-treesitter").install(
+        language.get_treesitter_packages({
             "xml",
             "http",
             "regex",
@@ -31,31 +30,8 @@ function pack.load()
             "gitcommit",
             "gitignore",
             "dockerfile",
-        }),
-        ignore_install = {},
-        highlight = {
-            enable = true,
-            additional_vim_regex_highlighting = false,
-            disable = language.get_treesitter_disabled_highlight(),
-        },
-        indent = {
-            enable = false,
-        },
-        -- incremental selection
-        incremental_selection = {
-            enable = false,
-            keymaps = {
-                init_selection = "<cr>",
-                node_incremental = "<cr>",
-                node_decremental = "<bs>",
-                scope_incremental = "<tab>",
-            },
-        },
-        -- nvim-ts-autotag
-        autotag = {
-            enable = true,
-        },
-    })
+        })
+    )
 end
 
 function pack.after_load() end

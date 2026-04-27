@@ -74,7 +74,6 @@ function pack.after_load()
                     { annote = "[mason.nvim]", key = "[mason.nvim]" }
                 )
             end
-        else
         end
     end
 end

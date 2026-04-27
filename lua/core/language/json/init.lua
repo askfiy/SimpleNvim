@@ -11,7 +11,6 @@ lang_pack.mason = {
 lang_pack.treesitter = {
     ensure_installed = {
         "json",
-        "jsonc",
         "json5",
     },
     disable_highlight = false,
@@ -22,7 +21,7 @@ lang_pack.lspconfig = {
 }
 
 lang_pack.code_runner = {
-    filetypes = { "json", "json5", "jsonc" },
+    filetypes = { "json", "json5" },
     command = function()
         return ("lua %s"):format(vim.fn.expand("%:p"))
     end,

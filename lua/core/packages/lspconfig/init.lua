@@ -18,10 +18,10 @@ pack.lazy = {
 function pack.before_load()
     pack.plugin = require("lspconfig")
 
-    -- require("mason-lspconfig").setup({
-    --     ensure_installed = {},
-    --     automatic_installation = true,
-    -- })
+    require("mason-lspconfig").setup({
+        ensure_installed = vim.tbl_keys(language.get_lsp_packages()),
+        automatic_installation = true,
+    })
 end
 
 function pack.load()

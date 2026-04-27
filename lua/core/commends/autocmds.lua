@@ -70,28 +70,50 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 
 if conf.is_input_switch() then
     local platform = vim.loop.os_uname().sysname
+    local is_wsl = vim.fn.has("wsl") == 1
 
-    if platform == "Darwin" and vim.fn.executable("im-select") ~= 1 then
-        vim.notify(
-            "settings.input_switch failed to apply, `im-select` is missing",
-            "INFO",
-            { annote = "[SimpleNvim]", key = "[SimpleNvim]" }
-        )
-        return
+    local cmd_name = (is_wsl or platform == "NT") and "im-select.exe"
+        or "im-select"
+
+    if vim.fn.executable(cmd_name) ~= 1 then
+        if
+            not (
+                platform == "Linux"
+                and not is_wsl
+                and vim.fn.executable("fcitx5-remote") == 1
+            )
+        then
+            vim.notify(
+                "settings.input_switch failed to apply, `"
+                    .. cmd_name
+                    .. "` is missing",
+                "INFO",
+                { annote = "[SimpleNvim]", key = "[SimpleNvim]" }
+            )
+            return
+        end
     end
 
     vim.api.nvim_create_autocmd({ "InsertLeave" }, {
         pattern = { "*" },
         callback = function()
-            if platform == "Darwin" then
+            if is_wsl or platform == "NT" then
+                vim.print("Yes")
+                vim.fn.jobstart({ "im-select.exe", "1033" })
+            elseif platform == "Darwin" then
                 local input_status = vim.fn.system("im-select")
+
                 if input_status:match("com.apple.keylayout.ABC") == nil then
-                    vim.fn.system("im-select com.apple.keylayout.ABC") -- 切换到英文输入法
+                    vim.fn.system("im-select com.apple.keylayout.ABC")
                 end
             elseif platform == "Linux" then
-                local input_status = tonumber(vim.fn.system("fcitx5-remote"))
-                if input_status == 2 then
-                    vim.fn.system("fcitx5-remote -c")
+                local handle = io.popen("fcitx5-remote")
+                if handle then
+                    local input_status = tonumber(handle:read("*a"))
+                    handle:close()
+                    if input_status == 2 then
+                        vim.fn.system("fcitx5-remote -c")
+                    end
                 end
             end
         end,
