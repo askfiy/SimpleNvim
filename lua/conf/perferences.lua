@@ -1,15 +1,15 @@
 vim.deprecate = function() end
 
-if vim.fn.has("wsl") == 1 then
+if vim.fn.has("wsl") == 1 and vim.fn.executable("win32yank.exe") == 1 then
     vim.g.clipboard = {
-        name = "WslClipboard",
+        name = "win32yank-wsl",
         copy = {
-            ["+"] = "clip.exe",
-            ["*"] = "clip.exe",
+            ["+"] = "win32yank.exe -i --crlf",
+            ["*"] = "win32yank.exe -i --crlf",
         },
         paste = {
-            ["+"] = 'powershell.exe -NoLogo -NoProfile -c [Console]::Out.Write($(Get-Clipboard -Raw).ToString().Replace("`r", ""))',
-            ["*"] = 'powershell.exe -NoLogo -NoProfile -c [Console]::Out.Write($(Get-Clipboard -Raw).ToString().Replace("`r", ""))',
+            ["+"] = "win32yank.exe -o --lf",
+            ["*"] = "win32yank.exe -o --lf",
         },
         cache_enabled = 0,
     }
